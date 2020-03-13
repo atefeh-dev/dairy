@@ -1,18 +1,13 @@
 from django.conf.urls import url
 from . import views
+from .views import register , active
 from django.urls import path, include
-from rest_framework import routers
-from rest_framework.urlpatterns import format_suffix_patterns
 
 # create_user = views.UserViewSet.as_view({'POST': 'create'})
 
 urlpatterns = [
-    path('users/', views.UserViewSet.as_view({
-        'get': 'list',
-        'post': 'create', })),
+    path('register/', views.register),
+    path('register/<int:id>/<str:token>/', views.active, name='active'),
 
-    path('ResetPassword/<str:pk>/', views.UserViewSet.as_view({
-        'post': 'update', })),
 ]
 
-urlpatterns = format_suffix_patterns(urlpatterns)
